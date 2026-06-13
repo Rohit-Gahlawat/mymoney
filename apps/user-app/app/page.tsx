@@ -1,7 +1,7 @@
 import { Button } from "@repo/ui/buttons";
 
 import { PrismaClient } from "@repo/db";
-import { useAtom, balanceAtom } from "@repo/store";
+import { useAtom, balanceAtom, useBalance } from "@repo/store";
 
 
 

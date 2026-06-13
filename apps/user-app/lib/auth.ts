@@ -4,6 +4,7 @@ import { userSigninSchema, UserSigninType } from "@repo/zod";
 import db from "@repo/db"
 import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
+import type { NextAuthConfig } from "next-auth";
 
 export const authoptions = {
     providers: [
@@ -82,4 +83,4 @@ export const authoptions = {
     }
 
 
-}
+} satisfies NextAuthConfig;

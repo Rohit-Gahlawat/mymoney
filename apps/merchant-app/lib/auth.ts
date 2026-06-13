@@ -1,2 +1,11 @@
-import Credentials from "next-auth/providers/credentials";
-import bcrypt from "bcrypt";
+import Google from "next-auth/providers/google";
+
+export const authoptions = {
+    providers: [
+        Google({
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_SECRET!
+        })
+    ],
+    secret: process.env.AUTH_SECRET
+}
