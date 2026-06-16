@@ -9,13 +9,13 @@ datasource db {
 }
 
 model User {
-  id                String             @id @default(uuid())
-  email             String?            @unique
+  id                String              @id @default(uuid())
+  email             String?             @unique
   name              String?
-  number            String             @unique
+  number            String              @unique
   password          String
   Balance           Balance[]
-  onRampTransaction OnRampTransaction?
+  onRampTransaction OnRampTransaction[]
 }
 
 model Merchent {
@@ -40,7 +40,7 @@ model OnRampTransaction {
   provider  String
   amount    Int
   startTime DateTime
-  userId    String           @unique
+  userId    String
   user      User             @relation(fields: [userId], references: [id])
 }
 
