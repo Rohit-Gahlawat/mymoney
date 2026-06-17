@@ -1,3 +1,4 @@
+import "dotenv/config";
 import express from "express";
 import db from "@repo/db"
 const app = express();
@@ -49,4 +50,12 @@ app.post("/hdfcwebhook", async (req, res) => {
 
 
 
-app.listen(3003, () => console.log("bank-webhook server is ruinning on port 3003"));
+const server = app.listen(3003, () => console.log("bank-webhook server is ruinning on port 3003"));
+server.on("error", (err: NodeJS.ErrnoException) => {
+    if (err.code === "EADDRINUSE") {
+        console.error("Port 3003 is already in use. Another bank-webhook instance is running.");
+    } else {
+        console.error(err);
+    }
+    process.exit(1);
+});

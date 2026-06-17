@@ -6,17 +6,19 @@ const adapter = new PrismaNeon({ connectionString: process.env.DIRECT_DATABASE_U
 const prisma = new PrismaClient({ adapter });
 
 async function main() {
-
+    await prisma.balance.deleteMany();
+    await prisma.onRampTransaction.deleteMany();
+    await prisma.user.deleteMany();
 
 
     const alicePassword = await bcrypt.hash("alice12345", 10);
     const bobPassword = await bcrypt.hash("bob12345", 10);
 
     const alice = await prisma.user.upsert({
-        where: { number: '9999999997' },
+        where: { number: '9999999977' },
         update: {},
         create: {
-            number: '9999999997',
+            number: '9999999977',
             password: alicePassword,
             name: 'alice',
             onRampTransaction: {
@@ -28,14 +30,20 @@ async function main() {
                     provider: "HDFC Bank",
                 },
             },
+            Balance: {
+                create: {
+                    amount: 20000,
+                    locked: 0,
+                },
+            },
         },
     });
 
     const bob = await prisma.user.upsert({
-        where: { number: '9999999998' },
+        where: { number: '9999999988' },
         update: {},
         create: {
-            number: '9999999998',
+            number: '9999999988',
             password: bobPassword,
             name: 'bob',
             onRampTransaction: {
@@ -45,6 +53,12 @@ async function main() {
                     amount: 2000,
                     token: "123",
                     provider: "HDFC Bank",
+                },
+            },
+            Balance: {
+                create: {
+                    amount: 20000,
+                    locked: 0,
                 },
             },
         },
