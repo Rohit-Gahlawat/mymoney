@@ -43,7 +43,13 @@ export const AddMoney = () => {
             }))} />
             <div className="pt-6">
                 <Button onClick={async () => {
-                    await addMoney(amount, provider)
+                    try {
+                        await addMoney(amount, provider)
+                    } catch (e) {
+                        if (e instanceof Error) {
+                            return alert(e.message)
+                        }
+                    }
                     window.location.href = redirectUrl || ""
                 }}>
                     Add Money
