@@ -2,9 +2,10 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AppProvider } from "./provider";
-import { handleSignIn, handleSignOut } from "./actions";
+import { handleAppBarSignIn, handleSignOut } from "./actions";
 import { Appbar } from "@repo/ui/appbar";
-import { auth } from "@/auth"
+import { auth } from "@/auth";
+
 
 
 
@@ -34,7 +35,7 @@ export default async function RootLayout({
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable} bg-[#F9F8F6] text-stone-800`}>
         <AppProvider>
-          <Appbar user={user} onSignin={handleSignIn} onSignout={handleSignOut}></Appbar>
+          <Appbar user={user} onSignin={handleAppBarSignIn} onSignout={handleSignOut}></Appbar>
           {children}
         </AppProvider>
       </body>

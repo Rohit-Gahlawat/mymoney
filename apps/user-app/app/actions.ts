@@ -14,6 +14,11 @@ export async function handleSignOut() {
     await signOut();
 };
 
+export async function handleAppBarSignIn() {
+    "use server";
+    await signIn();
+};
+
 export async function handleSignIn(
     number: string, password: string
 ) {
@@ -29,6 +34,7 @@ export async function handleSignIn(
         if (e instanceof AuthError) {
             return { success: false, message: "Invalid number or password" }
         }
+        throw e
     }
     return { success: true };
 
@@ -136,16 +142,13 @@ export async function SignUp({ phone, password }: UserSigninType) {
     const hashedpassword = await bcrypt.hash(parsed.data.password, 10);
     try {
 
-        const newUser = await db.user.create({
+        await db.user.create({
             data: {
                 number: parsed.data.phone,
                 password: hashedpassword
             }
         })
-        return {
-            id: newUser.id,
-            number: newUser.number
-        }
+
     } catch (e) {
         console.log(e);
         return {
@@ -154,5 +157,22 @@ export async function SignUp({ phone, password }: UserSigninType) {
         }
     };
 
+    try {
+        await signIn("credentials", {
+            phone: parsed.data?.phone,
+            password: parsed.data?.password,
+            redirect: false
+        })
+    } catch (e) {
+        if (e instanceof AuthError) {
+            return {
+                success: false, message: "Account created but auto-login failed. Please sign in."
+            }
+        }
+        throw e
+    }
+    return {
+        success: true
+    }
 
 }
