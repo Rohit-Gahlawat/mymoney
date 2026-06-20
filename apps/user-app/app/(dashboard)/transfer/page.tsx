@@ -3,12 +3,18 @@ import { AddMoney } from "../../../components/AddMoneyCard";
 import { BalanceCard } from "../../../components/BalanceCard";
 import { OnRampTransactions } from "../../../components/OnRampTransaction";
 import { auth } from "@/auth";
+import { redirect } from "next/navigation";
 
 async function getBalance() {
     const session = await auth();
+    const userId = session?.user?.id;
+    if (!userId) {
+
+        return { amount: 0, locked: 0 };
+    }
     const balance = await db.balance.findFirst({
         where: {
-            userId: session?.user?.id
+            userId: userId
         }
     });
     return {
@@ -19,11 +25,17 @@ async function getBalance() {
 
 async function getOnRampTransactions() {
     const session = await auth();
+    const userId = session?.user?.id
+    if (!userId) {
+        return []
+    }
     const txns = await db.onRampTransaction.findMany({
         where: {
-            userId: session?.user?.id
+            userId: userId
         }
+
     });
+
     return txns.map(t => ({
         time: t.startTime,
         amount: t.amount,
@@ -33,6 +45,11 @@ async function getOnRampTransactions() {
 }
 
 export default async function TransferPage() {
+    const session = await auth();
+    const userId = session?.user?.id
+    if (!userId) {
+        redirect("/signin")
+    }
     const balance = await getBalance();
     const transactions = await getOnRampTransactions();
 
