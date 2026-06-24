@@ -23,10 +23,10 @@ export default function SignInPage() {
 
 
     return (
-        <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-[#EFE9E3] px-4 py-12">
+        <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center bg-white px-4 py-12">
             <div className="w-full max-w-md">
                 <div className="mb-8 text-center">
-                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#C9B59C] text-lg font-bold text-stone-900 shadow-sm">
+                    <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-xl bg-[#FF0052] text-lg font-bold text-white shadow-sm">
                         P
                     </div>
                     <h1 className="text-2xl font-bold tracking-tight text-stone-800">
@@ -37,9 +37,9 @@ export default function SignInPage() {
                     </p>
                 </div>
 
-                <div className="rounded-2xl border border-[#D9CFC7] bg-[#F9F8F6] p-6 shadow-sm sm:p-8">
+                <div className="rounded-2xl border border-gray-200 bg-white p-6 shadow-sm sm:p-8">
                     {err && (
-                        <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700">
+                        <p className="mb-4 rounded-lg bg-[#FF0052]/10 px-3 py-2 text-sm text-[#FF0052]">
                             {err}
                         </p>
                     )}
@@ -52,7 +52,7 @@ export default function SignInPage() {
                                 name="phone"
                                 type="tel"
                                 placeholder="Enter your mobile number"
-                                className="w-full rounded-xl border border-[#D9CFC7] bg-[#F9F8F6] px-4 py-2.5 text-sm text-stone-800 outline-none transition-colors placeholder:text-stone-400 focus:border-[#C9B59C] focus:ring-2 focus:ring-[#C9B59C]/30"
+                                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-stone-800 outline-none transition-colors placeholder:text-stone-400 focus:border-[#FF0052] focus:ring-2 focus:ring-[#FF0052]/30"
                                 onChange={(e) => {
                                     setNumber(e.target.value)
                                 }}
@@ -68,7 +68,7 @@ export default function SignInPage() {
                                 name="password"
                                 type="password"
                                 placeholder="Enter your password"
-                                className="w-full rounded-xl border border-[#D9CFC7] bg-[#F9F8F6] px-4 py-2.5 text-sm text-stone-800 outline-none transition-colors placeholder:text-stone-400 focus:border-[#C9B59C] focus:ring-2 focus:ring-[#C9B59C]/30"
+                                className="w-full rounded-xl border border-gray-200 bg-white px-4 py-2.5 text-sm text-stone-800 outline-none transition-colors placeholder:text-stone-400 focus:border-[#FF0052] focus:ring-2 focus:ring-[#FF0052]/30"
                                 onChange={(e) => {
                                     setPassword(e.target.value)
                                 }}
@@ -78,7 +78,7 @@ export default function SignInPage() {
 
                         <button
                             type="button"
-                            className="mt-2 w-full rounded-xl bg-[#C9B59C] px-4 py-2.5 text-sm font-semibold text-stone-900 shadow-sm transition hover:brightness-95 active:brightness-90"
+                            className="mt-2 w-full rounded-xl bg-[#FF0052] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-95 active:brightness-90"
                             onClick={handleSignInErr}
                         >
                             Sign In
@@ -90,7 +90,7 @@ export default function SignInPage() {
                     Don&apos;t have an account?{" "}
                     <Link
                         href="/signup"
-                        className="font-semibold text-stone-800 underline-offset-2 hover:underline"
+                        className="font-semibold text-[#FF0052] underline-offset-2 hover:underline"
                     >
                         Sign up
                     </Link>
