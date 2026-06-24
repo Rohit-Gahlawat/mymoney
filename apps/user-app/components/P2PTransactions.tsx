@@ -20,12 +20,12 @@ export const P2PTransactions = ({
         </Card>
     }
     return <Card title="Recent Transactions">
-        <div className="flex flex-col divide-y divide-[#D9CFC7]">
+        <div className="flex flex-col divide-y divide-gray-200">
             {transactions.map((t, i) => {
                 const sent = t.type === "sent";
                 return <div key={i} className="flex items-center justify-between gap-3 py-3">
                     <div className="flex min-w-0 items-center gap-3">
-                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#EFE9E3] text-xs font-semibold text-stone-600">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#FF0052]/10 text-xs font-semibold text-[#FF0052]">
                             {(t.name || t.number || "?").charAt(0).toUpperCase()}
                         </div>
                         <div className="min-w-0">
@@ -37,7 +37,7 @@ export const P2PTransactions = ({
                             </div>
                         </div>
                     </div>
-                    <div className="shrink-0 text-sm font-semibold tabular-nums text-stone-800">
+                    <div className={`shrink-0 text-sm font-semibold tabular-nums ${sent ? "text-[#FF0052]" : "text-[#399918]"}`}>
                         {sent ? "−" : "+"} Rs {t.amount / 100}
                     </div>
                 </div>
