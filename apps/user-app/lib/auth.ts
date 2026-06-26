@@ -6,6 +6,7 @@ import { Session } from "next-auth";
 import { JWT } from "next-auth/jwt";
 import type { NextAuthConfig } from "next-auth";
 
+
 export const authoptions = {
     providers: [
         Credentials({
